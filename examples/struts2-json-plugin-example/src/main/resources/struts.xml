@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+
+	<package name="default" namespace="/" extends="json-default">
+
+		<action name="" class="es.cenobit.struts2.json.example.IndexAction">
+			<result>/views/index/index.jsp</result>
+		</action>
+
+		<action name="list" class="es.cenobit.struts2.json.example.IndexAction"
+			method="list" />
+
+		<action name="map" class="es.cenobit.struts2.json.example.IndexAction"
+			method="map" />
+
+		<action name="bar" class="es.cenobit.struts2.json.example.IndexAction"
+			method="bar" />
+
+		<action name="bar-excludes" class="es.cenobit.struts2.json.example.IndexAction"
+			method="barExcludes" />
+
+		<action name="foo" class="es.cenobit.struts2.json.example.IndexAction"
+			method="foo" />
+
+		<action name="foo-excludes" class="es.cenobit.struts2.json.example.IndexAction"
+			method="fooExcludes" />
+
+	</package>
+
+</struts>
