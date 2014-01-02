@@ -1,6 +1,8 @@
+syntax: glob
+*~
 *.class
-
-# Package Files #
 *.jar
 *.war
 *.ear
+target/*
+

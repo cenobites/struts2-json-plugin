@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts order="20">
+	<bean type="com.opensymphony.xwork2.ActionProxyFactory" name="json"
+		class="es.cenobit.struts2.json.JsonActionProxyFactory" />
+
+	<constant name="struts.actionProxyFactory" value="json" />
+
+	<constant name="struts.convention.default.parent.package"
+		value="json-default" />
+
+	<package name="json-default" extends="struts-default">
+
+		<result-types>
+			<result-type name="json" class="es.cenobit.struts2.json.JsonResult" />
+		</result-types>
+
+		<interceptors>
+			<interceptor name="json"
+				class="es.cenobit.struts2.json.interceptor.JsonInterceptor" />
+
+			<interceptor-stack name="jsonStack">
+				<interceptor-ref name="json" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+
+		<!-- <default-interceptor-ref name="jsonStack"></default-interceptor-ref> -->
+
+	</package>
+</struts>
