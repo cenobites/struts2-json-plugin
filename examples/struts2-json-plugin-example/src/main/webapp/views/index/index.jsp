@@ -20,7 +20,9 @@
 		<li><a href="${pageContext.request.contextPath}/bar">Bar()</a></li>
 		<li><a href="${pageContext.request.contextPath}/bar-excludes">Bar() - @Json(exclude = { "description", "pubDate", "status" })</a></li>
 		<li><a href="${pageContext.request.contextPath}/foo">Foo()</a></li>
-		<%-- <li><a href="${pageContext.request.contextPath}/foo-excludes">Foo() - @Json(exclude = { "id", "bar.title", "bar.status" })</a></li> --%>
+		<li><a href="${pageContext.request.contextPath}/foo-excludes">Foo() - @Json(exclude = { "id", "Bar.title", "Bar.status" })</a></li>
+		<li><a href="${pageContext.request.contextPath}/etc">Etc()</a></li>
+        <li><a href="${pageContext.request.contextPath}/etc-excludes">Etc() - @Json(exclude = { "id", "Bar.title", "Bar.status", "Foo" })</a></li>
 	</ul>
 
 </body>

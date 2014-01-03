@@ -10,6 +10,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import es.cenobit.struts2.json.annotations.Json;
 import es.cenobit.struts2.json.example.objects.Bar;
+import es.cenobit.struts2.json.example.objects.Etc;
 import es.cenobit.struts2.json.example.objects.Foo;
 
 public class IndexAction extends ActionSupport {
@@ -45,7 +46,7 @@ public class IndexAction extends ActionSupport {
     }
 
     @Json(exclude = { "description", "pubDate", "status" })
-    public Bar barExcludes() {
+    public Bar barWithExcludeFields() {
         Bar bar = new Bar(1L, "Mussum ipsum",
                 " Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo",
                 new Date(), Boolean.TRUE);
@@ -61,12 +62,32 @@ public class IndexAction extends ActionSupport {
         return foo;
     }
 
-    @Json(exclude = { "id", "bar.title", "bar.status" })
-    public Foo fooExcludes() {
+    @Json(exclude = { "id", "Bar.title", "Bar.status" })
+    public Foo fooWithExcludeFields() {
         Bar bar = new Bar(1L, "Mussum ipsum",
                 " Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo",
                 new Date(), Boolean.TRUE);
         Foo foo = new Foo(2L, "Interessantiss", bar);
         return foo;
+    }
+
+    @Json
+    public Etc etc() {
+        Bar bar = new Bar(1L, "Mussum ipsum",
+                " Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo",
+                new Date(), Boolean.TRUE);
+        Foo foo = new Foo(2L, "Interessantiss", bar);
+        Etc etc = new Etc(42L, "Cevadis", bar, foo);
+        return etc;
+    }
+
+    @Json(exclude = { "id", "Bar.title", "Bar.status", "Foo" })
+    public Etc etcWithExcludeFields() {
+        Bar bar = new Bar(1L, "Mussum ipsum",
+                " Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo",
+                new Date(), Boolean.TRUE);
+        Foo foo = new Foo(2L, "Interessantiss", bar);
+        Etc etc = new Etc(42L, "Cevadis", bar, foo);
+        return etc;
     }
 }

@@ -7,7 +7,6 @@ Struts 2 JSON Plugin
 TODO
 ----
 
-* Annotations Json (exclude, include, ...)
 * Interceptor Json (validation, ...)
 * OSGi Support
 * Tests

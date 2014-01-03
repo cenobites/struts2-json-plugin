@@ -22,13 +22,19 @@
 			method="bar" />
 
 		<action name="bar-excludes" class="es.cenobit.struts2.json.example.IndexAction"
-			method="barExcludes" />
+			method="barWithExcludeFields" />
 
 		<action name="foo" class="es.cenobit.struts2.json.example.IndexAction"
 			method="foo" />
 
 		<action name="foo-excludes" class="es.cenobit.struts2.json.example.IndexAction"
-			method="fooExcludes" />
+			method="fooWithExcludeFields" />
+
+		<action name="etc" class="es.cenobit.struts2.json.example.IndexAction"
+			method="etc" />
+
+		<action name="etc-excludes" class="es.cenobit.struts2.json.example.IndexAction"
+			method="etcWithExcludeFields" />
 
 	</package>
 
