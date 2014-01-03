@@ -46,6 +46,7 @@ public class JsonResult implements Result {
 
         try {
             response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
             Writer writer = response.getWriter();
             writer.write(gson.toJson(findRootObject(invocation)));
             writer.flush();

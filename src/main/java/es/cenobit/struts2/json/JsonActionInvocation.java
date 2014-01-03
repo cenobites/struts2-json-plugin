@@ -383,6 +383,7 @@ public class JsonActionInvocation extends DefaultActionInvocation implements Act
 
         try {
             response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
             Writer writer = response.getWriter();
             writer.write(gson(method).toJson(methodResult));
             writer.flush();

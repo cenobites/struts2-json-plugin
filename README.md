@@ -129,7 +129,7 @@ public class IndexAction extends ActionSupport {
 ```curl
 $ curl -i -X GET http://localhost:8080/struts2-json-plugin-example/bar
 HTTP/1.1 200 OK
-Content-Type: application/json;charset=ISO-8859-1
+Content-Type: application/json;charset=UTF-8
 Transfer-Encoding: chunked
 Server: Jetty(8.1.7.v20120910)
 
