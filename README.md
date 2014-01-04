@@ -9,7 +9,6 @@ Some reasons you might want to use:
 * Simple, powerful, flexible.
 * Serializable with [Gson](http://code.google.com/p/google-gson/ "Gson") (hey, this is great!).
 * Support for [OSGi](http://www.osgi.org/Main/HomePage "OSGi") ([Struts OSGi Plugin](http://struts.apache.org/release/2.2.x/docs/osgi-plugin.html "Struts OSGi Plugin")).
-* Integration for [Struts Convention Plugin](http://struts.apache.org/release/2.2.x/docs/convention-plugin.html "Struts Convention Plugin").
 * Extensive documentation, and great community support.
 
 
@@ -147,9 +146,51 @@ Server: Jetty(8.1.7.v20120910)
 For more tests see [Examples](https://github.com/cenobites/struts2-json-plugin/tree/master/examples "Examples").
 
 
+Actions in jar files
+--------------------
+
+By default the Json plugin will not scan jar files for actions. For a jar to be scanned, its URL needs to match at least one of the regular expressions in struts.json.action.includeJars. In this example myjar1.jar and myjar2.jar will be scanned:
+
+```xml
+    <constant name="struts.json.action.includeJars" value=".*?/myjar1.*?jar(!/)?,.*?/myjar2*?jar(!/)?"
+```
+
+Note that the regular expression will be evaluated against the URL of the jar, and not the file name, the jar URL can contain a path to the jar file and a trailing "!/".
+
+
+Automatic configuration reloading
+---------------------------------
+
+The Json plugin can automatically reload configuration changes, made in classes the contain actions, without restarting the container. This is a similar behavior to the automatic xml configuration reloading. To enable this feature, add this to your struts.xml file:
+
+```xml
+    <constant name="struts.devMode" value="true"/>
+    <constant name="struts.json.classes.reload" value="true" /> 
+```
+
+This feature is experimental and has not been tested on all container, and it is strongly advised not to use it in production environments.
+
+
+JBoss
+-----
+
+When using this plugin with JBoss, you need to set the following constants:
+
+```xml
+    <constant name="struts.json.exclude.parentClassLoader" value="true" />
+    <constant name="struts.json.action.fileProtocols" value="jar,vfsfile,vfszip" />
+```
+
+Notes
+-----
+
+**WARNING: Struts Convention Plugin and Struts Json Plugin doesn't work together**
+
+
 TODO
 ----
 
+* Integration for Struts Convention Plugin
 * Interceptor Json (validation, ...)
 * Tests
 * Documentation

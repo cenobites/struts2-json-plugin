@@ -109,7 +109,7 @@
 						<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
 						<addMavenDescriptor>false</addMavenDescriptor>
 						<manifestEntries>
-							<Export-Package><![CDATA[es.cenobit.struts2.json;version=${project.version}, es.cenobit.struts2.json.annotations;version=${project.version}, es.cenobit.struts2.json.interceptor;version=${project.version}, es.cenobit.struts2.json.util;version=${project.version}, es.cenobit.struts2.osgi.convention;version=${project.version}]]></Export-Package>
+							<Export-Package><![CDATA[es.cenobit.struts2.json;version=${project.version}, es.cenobit.struts2.json.annotations;version=${project.version}, es.cenobit.struts2.json.interceptor;version=${project.version}, es.cenobit.struts2.json.osgi;version=${project.version}, es.cenobit.struts2.json.util;version=${project.version}]]></Export-Package>
 							<Bundle-Version>${project.version}</Bundle-Version>
 							<Bundle-ContactAddress>https://github.com/cenobites/struts2-json-plugin/</Bundle-ContactAddress>
 							<Bundle-Vendor>Cenobit Technologies Inc.</Bundle-Vendor>

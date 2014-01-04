@@ -32,9 +32,7 @@
 	<!-- ============================================================= -->
 	<!-- Support for OSGi and Convention integration ================= -->
 	<!-- ============================================================= -->
-	<bean type="com.opensymphony.xwork2.config.PackageProvider" name="convention.packageProvider" class="es.cenobit.struts2.osgi.convention.ClasspathPackageProvider" />
-	<constant name="struts.convention.redirect.to.slash" value="true" />
-	<constant name="struts.convention.default.parent.package" value="convention-default" />
+	<bean type="com.opensymphony.xwork2.config.PackageProvider" name="convention.packageProvider" class="es.cenobit.struts2.json.osgi.ClasspathPackageProvider" />
 	<!-- <constant name="struts.convention.action.includeJars" /> -->
 
 	<package name="json-default" extends="struts-default">

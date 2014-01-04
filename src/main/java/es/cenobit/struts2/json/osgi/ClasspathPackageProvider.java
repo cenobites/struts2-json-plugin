@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License. 
  */
-package es.cenobit.struts2.osgi.convention;
+package es.cenobit.struts2.json.osgi;
 
 import com.opensymphony.xwork2.config.Configuration;
 import com.opensymphony.xwork2.config.ConfigurationException;
@@ -32,39 +32,26 @@ import es.cenobit.struts2.json.JsonConstants;
  * to the configured instance of the {@link ActionConfigBuilder} interface.
  * </p>
  * 
- * <b>Support for OSGi and Convention integration</b>
+ * <b>Support for OSGi</b>
  */
 public class ClasspathPackageProvider implements PackageProvider {
 
 	private ActionConfigBuilder actionConfigBuilder;
-	private PackageProvider packageProviderOSGi;
 
 	@Inject
 	public ClasspathPackageProvider(Container container) {
 		this.actionConfigBuilder = container.getInstance(ActionConfigBuilder.class,
 				container.getInstance(String.class, JsonConstants.JSON_ACTION_CONFIG_BUILDER));
-		this.packageProviderOSGi = container.getInstance(PackageProvider.class,
-				JsonConstants.CONVENTION_PACKAGE_PROVIDER_CLASS);
 	}
 
 	public void init(Configuration configuration) throws ConfigurationException {
-		if (packageProviderOSGi != null) {
-			packageProviderOSGi.init(configuration);
-		}
 	}
 
 	public boolean needsReload() {
-		boolean isNeedsReload = false;
-		if (packageProviderOSGi != null) {
-			isNeedsReload = isNeedsReload || packageProviderOSGi.needsReload();
-		}
-		return isNeedsReload || actionConfigBuilder.needsReload();
+		return actionConfigBuilder.needsReload();
 	}
 
 	public void loadPackages() throws ConfigurationException {
-		if (packageProviderOSGi != null) {
-			packageProviderOSGi.loadPackages();
-		}
 		actionConfigBuilder.buildActionConfigs();
 	}
 }
