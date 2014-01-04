@@ -4,6 +4,14 @@ Struts 2 JSON Plugin
 Struts 2 JSON Plugin focuses in simplicity and, therefore, all of its 
 functionalities have as main goal solve the developer's problem in the less intrusive way.
 
+Some reasons you might want to use:
+
+* Simple, powerful, flexible.
+* Serializable with [Gson](http://code.google.com/p/google-gson/ "Gson") (hey, this is great!).
+* Support for [OSGi](http://www.osgi.org/Main/HomePage "OSGi") ([Struts OSGi Plugin](http://struts.apache.org/release/2.2.x/docs/osgi-plugin.html "Struts OSGi Plugin")).
+* Integration for [Struts Convention Plugin](http://struts.apache.org/release/2.2.x/docs/convention-plugin.html "Struts Convention Plugin").
+* Extensive documentation, and great community support.
+
 
 Using it
 --------
@@ -14,7 +22,7 @@ Using it
 <dependency>
     <groupId>es.cenobit.struts2.json</groupId>
     <artifactId>struts2-json-plugin</artifactId>
-    <version>1.0</version>
+    <version>2.3.16</version> <!-- or last version Struts 2.x -->
 </dependency>
 ```
 
@@ -126,7 +134,7 @@ public class IndexAction extends ActionSupport {
 
 4.  Testing
 
-```curl
+```
 $ curl -i -X GET http://localhost:8080/struts2-json-plugin-example/bar
 HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
@@ -143,7 +151,6 @@ TODO
 ----
 
 * Interceptor Json (validation, ...)
-* OSGi Support
 * Tests
 * Documentation
 * Examples
