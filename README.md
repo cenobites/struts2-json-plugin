@@ -124,7 +124,7 @@ public class IndexAction extends ActionSupport {
 </struts>
 ```
 
-3.  Testing
+4.  Testing
 
 ```curl
 $ curl -i -X GET http://localhost:8080/struts2-json-plugin-example/bar

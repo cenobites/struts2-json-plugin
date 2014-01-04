@@ -9,7 +9,7 @@
 	<name>struts2-json-plugin-example</name>
 
 	<properties>
-		<struts2.version>2.3.16</struts2.version>
+		<struts2.version>2.3.15.3</struts2.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -30,7 +30,7 @@
 		<dependency>
 			<groupId>es.cenobit.struts2.json</groupId>
 			<artifactId>struts2-json-plugin</artifactId>
-			<version>1.0</version>
+			<version>${struts2.version}</version>
 		</dependency>
 
 		<dependency>
@@ -109,6 +109,19 @@
 						<version>1.2.17</version>
 					</dependency>
 				</dependencies>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.1</version>
+				<configuration>
+					<server>${project.name}</server>
+					<path>/${project.name}</path>
+					<contextReloadable>true</contextReloadable>
+					<warSourceDirectory>${output.war}</warSourceDirectory>
+					<backgroundProcessorDelay>3</backgroundProcessorDelay>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -1,21 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.apache.struts</groupId>
+		<artifactId>struts2-plugins</artifactId>
+		<version>2.3.15.3</version>
+	</parent>
 
 	<groupId>es.cenobit.struts2.json</groupId>
 	<artifactId>struts2-json-plugin</artifactId>
-	<version>1.0</version>
+	<version>${parent.version}</version>
 	<packaging>jar</packaging>
 	<name>struts2-json-plugin</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
 	<dependencies>
 
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-core</artifactId>
-			<version>2.3.16</version>
 		</dependency>
+
+		<!-- ============================================================= -->
+		<!-- Support for OSGi and Convention integration ================= -->
+		<!-- ============================================================= -->
+		<!-- <dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts2-convention-plugin</artifactId>
+			<scope>provided</scope>
+		</dependency> -->
 
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
@@ -67,6 +83,25 @@
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>bundle-manifest</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>manifest</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<instructions>
+						<Bundle-Activator>org.apache.struts2.osgi.StrutsActivator</Bundle-Activator>
+						<manifestLocation>META-INF</manifestLocation>
+					</instructions>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>2.4</version>
@@ -80,9 +115,10 @@
 				</executions>
 				<configuration>
 					<archive>
+						<manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
 						<addMavenDescriptor>false</addMavenDescriptor>
 						<manifestEntries>
-							<Export-Package><![CDATA[es.cenobit.struts2.json;version=${project.version}, es.cenobit.struts2.json.annotations;version=${project.version}, es.cenobit.struts2.json.interceptor;version=${project.version}]]></Export-Package>
+							<Export-Package><![CDATA[es.cenobit.struts2.json;version=${project.version}, es.cenobit.struts2.json.annotations;version=${project.version}, es.cenobit.struts2.json.interceptor;version=${project.version}, es.cenobit.struts2.json.util;version=${project.version}, es.cenobit.struts2.osgi.convention;version=${project.version}]]></Export-Package>
 							<Bundle-Version>${project.version}</Bundle-Version>
 							<Bundle-ContactAddress>https://github.com/cenobites/struts2-json-plugin/</Bundle-ContactAddress>
 							<Bundle-Vendor>Cenobit Technologies Inc.</Bundle-Vendor>
@@ -96,8 +132,7 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<!-- TODO(inder): add manifest entry for maven group, artifact, and classifier 
-					ids -->
+				<!-- TODO(inder): add manifest entry for maven group, artifact, and classifier ids -->
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
 				<version>2.2.1</version>
@@ -122,8 +157,7 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<!-- TODO(inder): add manifest entry for maven group, artifact, and classifier 
-					ids -->
+				<!-- TODO(inder): add manifest entry for maven group, artifact, and classifier ids -->
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.9</version>
@@ -145,11 +179,6 @@
 					<show>protected</show>
 				</configuration>
 			</plugin>
-
 		</plugins>
 	</build>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
 </project>

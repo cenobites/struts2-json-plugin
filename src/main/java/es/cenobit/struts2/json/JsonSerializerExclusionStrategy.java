@@ -22,7 +22,7 @@ import java.util.Set;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 
-import es.cenobit.struts2.json.annotations.NoJson;
+import es.cenobit.struts2.json.annotations.DontExpose;
 
 public class JsonSerializerExclusionStrategy implements ExclusionStrategy {
 
@@ -38,7 +38,7 @@ public class JsonSerializerExclusionStrategy implements ExclusionStrategy {
 
     @Override
     public boolean shouldSkipField(FieldAttributes f) {
-        if (f.getAnnotation(NoJson.class) != null) {
+        if (f.getAnnotation(DontExpose.class) != null) {
             return true;
         }
 

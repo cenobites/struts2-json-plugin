@@ -3,14 +3,39 @@
 	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
-<struts order="20">
-	<bean type="com.opensymphony.xwork2.ActionProxyFactory" name="json"
-		class="es.cenobit.struts2.json.JsonActionProxyFactory" />
+<struts order="25">
+	<bean type="com.opensymphony.xwork2.ActionProxyFactory" name="actionProxyFactory" class="es.cenobit.struts2.json.JsonActionProxyFactory" />
 
-	<constant name="struts.actionProxyFactory" value="json" />
+	<bean type="es.cenobit.struts2.json.ActionConfigBuilder" name="actionConfigBuilder" class="es.cenobit.struts2.json.PackageBasedActionConfigBuilder" />
 
-	<constant name="struts.convention.default.parent.package"
-		value="json-default" />
+	<bean type="com.opensymphony.xwork2.config.PackageProvider" name="json.packageProvider" class="es.cenobit.struts2.json.ClasspathPackageProvider" />
+	<bean type="com.opensymphony.xwork2.config.PackageProvider" name="json.containerProvider" class="es.cenobit.struts2.json.ClasspathConfigurationProvider" />
+
+	<bean type="es.cenobit.struts2.json.JsonServices" name="jsonServices" class="es.cenobit.struts2.json.JsonService" />
+
+	<constant name="struts.actionProxyFactory" value="actionProxyFactory" />
+
+	<constant name="struts.json.actionConfigBuilder" value="actionConfigBuilder" />
+	<constant name="struts.json.jsonServices" value="jsonServices" />
+	<constant name="struts.json.classes.reload" value="false" />
+	<constant name="struts.json.action.disableScanning" value="false" />
+	<constant name="struts.json.action.mapAllMatches" value="false" />
+	<constant name="struts.json.action.checkImplementsAction" value="true" />
+	<constant name="struts.json.package.locators" value="action,actions,struts,struts2" />
+	<constant name="struts.json.package.locators.disable" value="false" />
+	<constant name="struts.json.package.locators.basePackage" value="" />
+	<constant name="struts.json.exclude.packages" value="org.apache.struts.*,org.apache.struts2.*,org.springframework.web.struts.*,org.springframework.web.struts2.*,org.hibernate.*" />
+	<!-- <constant name="struts.json.action.includeJars" /> -->
+	<constant name="struts.json.action.fileProtocols" value="jar" />
+	<constant name="struts.json.exclude.parentClassLoader" value="true" />
+
+	<!-- ============================================================= -->
+	<!-- Support for OSGi and Convention integration ================= -->
+	<!-- ============================================================= -->
+	<bean type="com.opensymphony.xwork2.config.PackageProvider" name="convention.packageProvider" class="es.cenobit.struts2.osgi.convention.ClasspathPackageProvider" />
+	<constant name="struts.convention.redirect.to.slash" value="true" />
+	<constant name="struts.convention.default.parent.package" value="convention-default" />
+	<!-- <constant name="struts.convention.action.includeJars" /> -->
 
 	<package name="json-default" extends="struts-default">
 
@@ -19,8 +44,7 @@
 		</result-types>
 
 		<interceptors>
-			<interceptor name="jsonInterceptor"
-				class="es.cenobit.struts2.json.interceptor.JsonInterceptor" />
+			<interceptor name="jsonInterceptor" class="es.cenobit.struts2.json.interceptor.JsonInterceptor" />
 
 			<interceptor-stack name="jsonStack">
 				<interceptor-ref name="jsonInterceptor" />
