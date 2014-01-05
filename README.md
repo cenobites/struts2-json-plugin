@@ -152,7 +152,7 @@ Actions in jar files
 By default the Json plugin will not scan jar files for actions. For a jar to be scanned, its URL needs to match at least one of the regular expressions in struts.json.action.includeJars. In this example myjar1.jar and myjar2.jar will be scanned:
 
 ```xml
-    <constant name="struts.json.action.includeJars" value=".*?/myjar1.*?jar(!/)?,.*?/myjar2*?jar(!/)?"
+<constant name="struts.json.action.includeJars" value=".*?/myjar1.*?jar(!/)?,.*?/myjar2*?jar(!/)?"
 ```
 
 Note that the regular expression will be evaluated against the URL of the jar, and not the file name, the jar URL can contain a path to the jar file and a trailing "!/".
@@ -164,8 +164,8 @@ Automatic configuration reloading
 The Json plugin can automatically reload configuration changes, made in classes the contain actions, without restarting the container. This is a similar behavior to the automatic xml configuration reloading. To enable this feature, add this to your struts.xml file:
 
 ```xml
-    <constant name="struts.devMode" value="true"/>
-    <constant name="struts.json.classes.reload" value="true" /> 
+<constant name="struts.devMode" value="true"/>
+<constant name="struts.json.classes.reload" value="true" /> 
 ```
 
 This feature is experimental and has not been tested on all container, and it is strongly advised not to use it in production environments.
@@ -177,9 +177,49 @@ JBoss
 When using this plugin with JBoss, you need to set the following constants:
 
 ```xml
-    <constant name="struts.json.exclude.parentClassLoader" value="true" />
-    <constant name="struts.json.action.fileProtocols" value="jar,vfsfile,vfszip" />
+<constant name="struts.json.exclude.parentClassLoader" value="true" />
+<constant name="struts.json.action.fileProtocols" value="jar,vfsfile,vfszip" />
 ```
+
+
+Jetty (embedded)
+----------------
+
+When using this plugin with Jetty in embedded mode, you need to set the following constants:
+
+```xml
+<constant name="struts.json.exclude.parentClassLoader" value="false" />
+<constant name="struts.json.action.fileProtocols" value="jar,code-source" />
+```
+
+
+Support for OSGi
+----------------
+
+With Spring managed beans to error:
+
+```
+ERROR: Bundle es.cenobit.struts2.osgi-mod [1] Error starting file:/home/nycholas/app/apache-tomcat-7.0.42/webapps/struts-osgi-app/WEB-INF/classes/bundles/3/struts-osgi-mod-1.0-SNAPSHOT.jar (org.osgi.framework.BundleException: Unresolved constraint in bundle es.cenobit.struts2.osgi-mod [1]: Unable to resolve 1.0: missing requirement [1.0] osgi.wiring.package; (&(osgi.wiring.package=es.cenobit.struts2.json.annotations)(version>=2.3.0)(!(version>=3.0.0))))
+org.osgi.framework.BundleException: Unresolved constraint in bundle es.cenobit.struts2.osgi-mod [1]: Unable to resolve 1.0: missing requirement [1.0] osgi.wiring.package; (&(osgi.wiring.package=es.cenobit.struts2.json.annotations)(version>=2.3.0)(!(version>=3.0.0)))
+    at org.apache.felix.framework.Felix.resolveBundleRevision(Felix.java:3826)
+    at org.apache.felix.framework.Felix.startBundle(Felix.java:1868)
+    at org.apache.felix.framework.Felix.setActiveStartLevel(Felix.java:1191)
+    at org.apache.felix.framework.FrameworkStartLevelImpl.run(FrameworkStartLevelImpl.java:295)
+    at java.lang.Thread.run(Thread.java:722)
+``` 
+
+To fix this add this line to MANIFEST.MF:
+
+```
+DynamicImport-Package: es.cenobit.struts2.json.annotations
+```
+
+Or if using The Apache Felix maven plugin (see below for details):
+
+```xml
+<DynamicImport-Package>es.cenobit.struts2.json.annotations</DynamicImport-Package>
+```
+
 
 Notes
 -----
