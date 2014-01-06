@@ -37,9 +37,9 @@
 
 	<package name="json-default" extends="struts-default">
 
-		<result-types>
+		<!-- <result-types>
 			<result-type name="json" class="es.cenobit.struts2.json.JsonResult" />
-		</result-types>
+		</result-types> -->
 
 		<interceptors>
 			<interceptor name="jsonInterceptor" class="es.cenobit.struts2.json.interceptor.JsonInterceptor" />
