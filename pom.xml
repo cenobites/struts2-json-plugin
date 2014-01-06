@@ -38,24 +38,24 @@
 			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
 		</license>
 	</licenses>
-	
+
 	<organization>
 		<name>Cenobit Technologies Inc.</name>
 		<url>http://cenobit.es/</url>
 	</organization>
-	
+
 	<developers>
-        <developer>
-            <id>cenobit.es</id>
-            <name>Cenobit Technology Inc.</name>
-            <email>hello@cenobit.es</email>
-        </developer>
-        <developer>
-            <id>nycholas</id>
-            <name>Nycholas de Oliveira e Oliveira</name>
-            <email>nycholas@gmail.com</email>
-        </developer>
-    </developers>
+		<developer>
+			<id>cenobit.es</id>
+			<name>Cenobit Technology Inc.</name>
+			<email>hello@cenobit.es</email>
+		</developer>
+		<developer>
+			<id>nycholas</id>
+			<name>Nycholas de Oliveira e Oliveira</name>
+			<email>nycholas@gmail.com</email>
+		</developer>
+	</developers>
 
 	<dependencies>
 
@@ -97,6 +97,20 @@
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.4</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
